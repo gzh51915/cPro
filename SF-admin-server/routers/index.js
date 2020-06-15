@@ -2,6 +2,7 @@ const express =require('express')
 const md5 =require('blueimp-md5')
 
 const AdminModule=require('../modules/AdminModule')
+const IconModule=require('../modules/IconModule')
 
 //得到路由器对象
 const router = express.Router()
@@ -20,6 +21,17 @@ router.post('/admin/login',(req,res)=>{
     }).catch(error=>{
         console.log('登录异常',error);
         res.send({status:1,msg:'登录异常，请重新尝试'})
+        
+    })
+})
+
+//图标获取
+router.get('/icon',(req,res)=>{
+    IconModule.find().then(icon=>{
+       res.send({status:0,data:icon})
+    }).catch(error=>{
+        console.log('图标获取异常',error);
+        res.send({status:1,msg:'图标获取异常，请重新尝试'})
         
     })
 })
