@@ -1,10 +1,9 @@
 import React from 'react';
+import Login from './view/Login/index.js'
 
 function App() {
   return (
-    <div className="App">
-      CMS
-    </div>
+    <Login />
   );
 }
 
