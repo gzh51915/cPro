@@ -1,14 +1,9 @@
-const initState = {
-    isLogin : false
-}
+import {combineReducers} from 'redux'
 
-export default (state = initState , action)=>{
-    switch (action.type){
-        case "CHANGE_LOGINSTATE":
-            return {
-                ...state,
-                isLogin:true
-            }
-        default : return state  
-    }
-}
+import loginReducer from '../view/Login/store/reducer'
+
+const rootReducer = combineReducers({
+    loginReducer
+})
+
+export default rootReducer

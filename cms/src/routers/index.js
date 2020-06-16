@@ -12,6 +12,4 @@ const RouterView =  <BrowserRouter>
                             <Route path='/' component={Home} />
                         </Switch>
                     </BrowserRouter>
-
-
 export default RouterView
