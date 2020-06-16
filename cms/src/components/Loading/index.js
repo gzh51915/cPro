@@ -1,7 +1,7 @@
 import React from 'react'
 import { Spin, Space } from 'antd';
 
-export default function index() {
+export default function Loading() {
     return (
         <div className="box">
             <Space size="middle">

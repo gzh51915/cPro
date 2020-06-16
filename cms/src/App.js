@@ -1,9 +1,14 @@
 import React from 'react';
-import Login from './view/Login/index.js'
+import {Login,Home} from './view'
+import {Route,Switch,Redirect} from 'react-router-dom'
 
 function App() {
   return (
-    <Login />
+    <Switch>
+      <Route path='/login' component={Login}></Route>
+      <Route path='/home' component={Home}></Route>
+      <Redirect to='/login' from='/' exact/>
+    </Switch>
   );
 }
 
