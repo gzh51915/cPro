@@ -49,7 +49,7 @@ const NotFound = Loadable({
     loading: Loading,
 }); 
 const Artcle = Loadable({
-    loader: () => import('../view/artcle'),
+    loader: () => import('../view/Artcle/home'),
     loading: Loading,
 }); 
 
