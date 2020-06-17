@@ -5,14 +5,18 @@ const service = axios.create({
     timeout:10000,  //设置超时的时间
     headers:{
         "content-type":"application/json",
+        token:sessionStorage.getItem("CPRO_TOKEN")
     }
 })
 
 service.interceptors.request.use(config=>{
+    // config.headers.Token=sessionStorage.getItem("CPRO_TOKEN")
+
     return config;
 })
 
 service.interceptors.response.use(res=>{
+    
     return res.data
 })
 

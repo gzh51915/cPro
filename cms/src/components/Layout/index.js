@@ -34,7 +34,7 @@ class index extends Component {
           visible: false,
         });
         this.props.quitLoginBtn()
-        localStorage.setItem("CPRO_TOKEN",'')
+        sessionStorage.setItem("CPRO_TOKEN",'')
         this.props.history.push('/login')
     };
 
