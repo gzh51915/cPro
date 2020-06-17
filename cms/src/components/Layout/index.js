@@ -39,7 +39,7 @@ class index extends Component {
         // }
     }
     render() {
-        console.log(this.props.location.pathname);
+        // console.log(this.props.location.pathname);
         return (
             <Layout className="bigbox">
                 <Header className="header">

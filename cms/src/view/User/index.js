@@ -7,32 +7,7 @@ import { SearchOutlined } from '@ant-design/icons';
 
 import { Card } from 'antd';
 
-const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-    },
-    {
-      key: '2',
-      name: 'Joe Black',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park',
-    },
-  ];
+import {getUserData} from '../../api'
 
 export default class User extends Component {
     constructor(){
@@ -41,6 +16,16 @@ export default class User extends Component {
             searchText: '',
             searchedColumn: '',
         };
+    }
+
+    componentDidMount(){
+      getUserData().then(res=>{
+        if(res.data.code===200){
+          this.setState({
+            userData:res.data.data.user
+          })
+        }
+      })
     }
 
     getColumnSearchProps = dataIndex => ({
@@ -109,38 +94,52 @@ export default class User extends Component {
     render() {
         const columns = [
             {
-              title: 'Name',
-              dataIndex: 'name',
-              key: 'name',
+              title: '用户名',
+              dataIndex: 'realname',
+              key: 'realname',
               width: '20%',
-              ...this.getColumnSearchProps('name'),
+              ...this.getColumnSearchProps('realname'),
             },
             {
-              title: 'Age',
-              dataIndex: 'age',
-              key: 'age',
+              title: '手机号',
+              dataIndex: 'phone',
+              key: 'phone',
               width: '20%',
-              ...this.getColumnSearchProps('age'),
+              ...this.getColumnSearchProps('phone'),
             },
             {
-              title: 'Address',
-              dataIndex: 'address',
-              key: 'address',
-              ...this.getColumnSearchProps('address'),
+              title: '性别',
+              dataIndex: 'gender',
+              key: 'gender',
             },
-
-            
             {
-                title: 'Test',
-                dataIndex: 'test',
-                key: 'test',
-                sorter: (a, b) => a.age - b.age,
+              title: '地址',
+              dataIndex: 'network',
+              key: 'network',
+              ...this.getColumnSearchProps('network'),
+            },
+            {
+                title: '生日',
+                dataIndex: 'birth',
+                key: 'birth',
             },
         ];
 
         return (
             <Card title="用户信息" bordered={false} style={{ width: '100%' }}>
-                <Table columns={columns} dataSource={data} />
+                <Table 
+                  columns={columns} 
+                  dataSource={this.state.userData}
+                  onRow={record => { 
+                    return {
+                      onClick: ()=> {
+                        console.log(record);
+                        console.log(this);
+                        this.props.history.push(`/home/userdetails?userid=${record.phone}`)
+                      }
+                    }
+                  }}
+                />
             </Card>
         )
     }

@@ -5,7 +5,7 @@ import {userLogin} from '../../api/index'
 import {connect} from 'react-redux'
 import {createChangeLogon} from './store/actionCreators'
 
-class index extends Component {
+class Login extends Component {
     onFinish = values => {
         userLogin(values).then(res=>{
             if(res.status===0){
@@ -76,4 +76,4 @@ const mapDispatch = (dispatch)=>{
     }
 }
 
-export default connect(mapState,mapDispatch)(index)
+export default connect(mapState,mapDispatch)(Login)

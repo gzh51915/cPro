@@ -30,7 +30,7 @@ class App extends Component {
                   <Route path='/home/artcle/home' component={ArtcleHome} exact />
                   <Route path='/home/artcle/add' component={ArtcleAdd} exact />
                   <Route path='/home' component={User} exact />
-                  <Route path='/home/user/UserDetails' component={UserDetails} exact />
+                  <Route path='/home/userdetails' component={UserDetails} exact />
                   <Redirect to="/404" />
                   {/* <Redirect to='/home/user' from="/home" exact /> */}
                   {/* <Route path='/' component={Home} /> */}
