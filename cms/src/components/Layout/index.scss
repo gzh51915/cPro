@@ -1,0 +1,33 @@
+#components-layout-demo-top-side-2 .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 28px 16px 0;
+    float: left;
+}
+
+.site-layout-background {
+    background: #fff;
+}
+
+.bigbox{
+    min-height: 100%;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .logo{
+        width: 220px;
+        height: 60px;
+        img{
+            height: 100%;
+            width: 100%;
+        }
+    }
+    a{
+        color: #eee;
+    }
+}
+
