@@ -5,3 +5,9 @@ export const userLogin = (data)=>{
         ...data
     })
 }
+
+export const reqArtcle = (data)=>{
+    return axios.get('/artcle',{
+        ...data
+    })
+}
