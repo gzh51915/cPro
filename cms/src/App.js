@@ -11,6 +11,8 @@ const {
   Channel,
   User,
   UserDetails,
+  ArtcleHome,
+  ArtcleAdd,
 } = router
 
 class App extends Component {
@@ -25,6 +27,8 @@ class App extends Component {
                   <Route path='/home/answer' component={Answer} exact />
                   <Route path='/home/banner' component={Banner} exact />
                   <Route path='/home/channel' component={Channel} exact />
+                  <Route path='/home/artcle/home' component={ArtcleHome} exact />
+                  <Route path='/home/artcle/add' component={ArtcleAdd} exact />
                   <Route path='/home' component={User} exact />
                   <Route path='/home/user/UserDetails' component={UserDetails} exact />
                   <Redirect to="/404" />

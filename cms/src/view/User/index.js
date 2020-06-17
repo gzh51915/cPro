@@ -128,6 +128,8 @@ export default class User extends Component {
               key: 'address',
               ...this.getColumnSearchProps('address'),
             },
+
+            
             {
                 title: 'Test',
                 dataIndex: 'test',

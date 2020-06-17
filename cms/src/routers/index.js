@@ -48,10 +48,15 @@ const NotFound = Loadable({
     loader: () => import('../view/NotFound'),
     loading: Loading,
 }); 
-const Artcle = Loadable({
-    loader: () => import('../view/artcle'),
+const ArtcleAdd = Loadable({
+    loader: () => import('../view/Artcle/add'),
     loading: Loading,
 }); 
+const ArtcleHome = Loadable({
+    loader: () => import('../view/Artcle/home'),
+    loading: Loading,
+}); 
+
 
 
 
@@ -65,5 +70,6 @@ export default {
     User,
     UserDetails,
     NotFound,
-    Artcle,
+    ArtcleHome,
+    ArtcleAdd
 }
