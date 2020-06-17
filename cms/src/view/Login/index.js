@@ -10,7 +10,7 @@ class index extends Component {
         userLogin(values).then(res=>{
             if(res.status===0){
                 this.props.changeLogin({isLogin:true,token:res.token});
-                localStorage.setItem('CPRO_TOKEN',res.token)
+                sessionStorage.setItem('CPRO_TOKEN',res.token)
                 this.props.history.push('/home')
             }
         })

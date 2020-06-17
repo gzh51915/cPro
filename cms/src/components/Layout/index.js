@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom'
 
 import { Layout, Menu, Breadcrumb } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { UserOutlined ,AreaChartOutlined ,CarryOutOutlined ,CoffeeOutlined ,QrcodeOutlined} from '@ant-design/icons';
 import logo from './logo.png'
 
 import {connect} from 'react-redux'
@@ -11,16 +11,35 @@ import {quitChangeLogon} from './store/actionCreators'
 
 import './index.scss'
 
-const { SubMenu } = Menu;
+// const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
 class index extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            path:this.props.location.pathname
+        }
+    }
+    // 退出登陆
     quitLogin = ()=>{
         this.props.quitLoginBtn()
         localStorage.setItem("CPRO_TOKEN",'')
         this.props.history.push('/login')
     }
+    // 导航跳转
+    jumpContent = (item)=>{
+        this.props.history.push(item.key)
+    }
+    componentDidUpdate(prevProps){
+        // if(prevProps.location.pathname!==this.props.location.pathname){
+        //     this.setState({
+        //         path:this.props.location.pathname
+        //     })
+        // }
+    }
     render() {
+        console.log(this.props.location.pathname);
         return (
             <Layout className="bigbox">
                 <Header className="header">
@@ -35,35 +54,36 @@ class index extends Component {
                 <Sider width={200} className="site-layout-background">
                     <Menu
                     mode="inline"
-                    defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1']}
+                    defaultSelectedKeys={[this.state.path]}
+                    // defaultOpenKeys={['sub1']}
                     style={{ height: '100%', borderRight: 0 }}
+                    onClick = {this.jumpContent}
                     >
-                    <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-                        <Menu.Item key="1">option1</Menu.Item>
-                        <Menu.Item key="2">option2</Menu.Item>
-                        <Menu.Item key="3">option3</Menu.Item>
-                        <Menu.Item key="4">option4</Menu.Item>
-                    </SubMenu>
-                    <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-                        <Menu.Item key="5">option5</Menu.Item>
-                        <Menu.Item key="6">option6</Menu.Item>
-                        <Menu.Item key="7">option7</Menu.Item>
-                        <Menu.Item key="8">option8</Menu.Item>
-                    </SubMenu>
-                    <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
+                        <Menu.Item icon={<UserOutlined />} key="/home">用户管理</Menu.Item>
+                        <Menu.Item icon={<AreaChartOutlined /> } key="/home/banner">轮播图管理</Menu.Item>
+                        <Menu.Item icon={<CarryOutOutlined />} key="/home/answer">问答管理</Menu.Item>
+                        <Menu.Item icon={<CoffeeOutlined />} key="/home/activity">活动管理</Menu.Item>
+                        <Menu.Item icon={<QrcodeOutlined />} key="/home/channel">频道管理</Menu.Item>
+
+                        {/*  <Route path='/activity' component={Activity} />
+                  <Route path='/answer' component={Answer} />
+                  <Route path='/banner' component={Banner} />
+                  <Route path='/channel' component={Channel} />
+                  <Route path='/user' component={User} />
+                  <Route path='/user/UserDetails' component={UserDetails} / */}
+                   
+                    {/* <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
                         <Menu.Item key="9">option9</Menu.Item>
                         <Menu.Item key="10">option10</Menu.Item>
                         <Menu.Item key="11">option11</Menu.Item>
                         <Menu.Item key="12">option12</Menu.Item>
-                    </SubMenu>
+                    </SubMenu> */}
                     </Menu>
                 </Sider>
                 <Layout style={{ padding: '0 24px 24px' }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
+                        {/* <Breadcrumb.Item>首页</Breadcrumb.Item>
+                        <Breadcrumb.Item>用户管理</Breadcrumb.Item> */}
                     </Breadcrumb>
                     <Content
                     className="site-layout-background"
@@ -82,7 +102,6 @@ class index extends Component {
     }
 }
 const mapState = (state)=>{
-    console.log(state);
     return state
 }
 const mapDispatch = (dispatch)=>{

@@ -4,7 +4,14 @@ import {Route,Switch,Redirect} from 'react-router-dom'
 import Layout from './components/Layout'
 import {connect} from 'react-redux'
 
-const {Home} = router
+const {
+  Activity,
+  Answer,
+  Banner,
+  Channel,
+  User,
+  UserDetails,
+} = router
 
 class App extends Component {
   render() {
@@ -13,8 +20,16 @@ class App extends Component {
           isLogin?
             <Layout>
               <Switch>
-                  <Route path='/home' component={Home} />
-                  <Route path='/' component={Home} />
+                  {/* <Route path='/home' component={Home} exact /> */}
+                  <Route path='/home/activity' component={Activity} exact/>
+                  <Route path='/home/answer' component={Answer} exact />
+                  <Route path='/home/banner' component={Banner} exact />
+                  <Route path='/home/channel' component={Channel} exact />
+                  <Route path='/home' component={User} exact />
+                  <Route path='/home/user/UserDetails' component={UserDetails} exact />
+                  <Redirect to="/404" />
+                  {/* <Redirect to='/home/user' from="/home" exact /> */}
+                  {/* <Route path='/' component={Home} /> */}
               </Switch>
             </Layout>
           :<Redirect to='/login'/>

@@ -1,8 +1,8 @@
 import {CHANGE_LOGIN} from './actionType'
 
 const initState = {
-    isLogin:false,
-    token:'',
+    isLogin:Boolean(sessionStorage.getItem('CPRO_TOKEN')),
+    token:sessionStorage.getItem('CPRO_TOKEN'),
 }
 
 export default (state = initState , action)=>{
