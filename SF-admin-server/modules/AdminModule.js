@@ -1,4 +1,4 @@
-//用户
+//管理员
 const mongoose=require('mongoose')
 const md5 = require('blueimp-md5')
 

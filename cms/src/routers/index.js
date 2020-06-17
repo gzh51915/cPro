@@ -1,4 +1,3 @@
-
 // import lazyLoad from '../utils/lazyLoad'
 import Loading from '../components/Loading'
 import Loadable from 'react-loadable';
@@ -49,6 +48,10 @@ const NotFound = Loadable({
     loader: () => import('../view/NotFound'),
     loading: Loading,
 }); 
+const Artcle = Loadable({
+    loader: () => import('../view/artcle'),
+    loading: Loading,
+}); 
 
 
 
@@ -62,4 +65,5 @@ export default {
     User,
     UserDetails,
     NotFound,
+    Artcle,
 }
