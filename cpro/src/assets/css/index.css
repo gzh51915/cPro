@@ -9,3 +9,11 @@ html {
   a{
     text-decoration: none;
   }
+  .clear_fix::after{
+    content:" ";
+    clear:both;
+    display:block;
+    height:0;
+    visibility:hidden;
+    overflow:hidden;
+}
