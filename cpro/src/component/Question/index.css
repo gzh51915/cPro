@@ -1,0 +1,29 @@
+.b_content{
+    padding: 0 15px;
+}
+.ans_list{
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E9E9E9;
+}
+
+.unanswer{
+    margin:10px;
+}
+.selected{
+   color: #009A61;
+   font-weight: bold;
+}
+
+.course{
+    height: 200px;
+}
+
+.swiper-container{
+    height: 200px;
+}
+
+.swiper-slide{
+    height: 100px;
+}
