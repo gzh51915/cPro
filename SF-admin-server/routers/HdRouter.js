@@ -90,4 +90,17 @@ router.post('/artcle/delete', (req, res) => {
       })
   })
 
+
+//更新文章
+router.post('/artcle/update',(req,res)=>{
+    const artcle =req.body
+    ArtcleModule.findOneAndUpdate({_id:artcle._id},artcle).then(oldArtcle=>{
+        const data =Object.assign(oldArtcle,artcle)
+        res.send({status:0,data})
+    }).catch(err=>{
+        console.log("更新文章异常",err)
+        res.send({status:1,msg:"文章更新异常，请重新尝试"})
+    })
+})
+
 module.exports=router

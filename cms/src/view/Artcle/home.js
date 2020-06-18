@@ -102,11 +102,11 @@ export default class ArtcleHome extends Component {
             }, {
                 title: "操作",
                 width: 200,
-                render: (item) => {
+                render: (artcle) => {
                     return (
                         <span>
-                            <Button type="primary" danger style={{marginRight:10}} onClick={()=>this.deleteArtcle(item._id)}>删除</Button>
-                            <Button type='primary'>修改</Button>
+                            <Button type="primary" danger style={{marginRight:10}} onClick={()=>this.deleteArtcle(artcle._id)}>删除</Button>
+                            <Button type='primary' onClick={()=>this.props.history.push('/home/artcle/add',artcle)}>修改</Button>
                         </span>
                     )
                 }
