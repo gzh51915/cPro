@@ -117,3 +117,11 @@
 .news__item_info .author a{
     color: #7c7b7b;
 }
+.clear_fix::after{
+    content:" ";
+    clear:both;
+    display:block;
+    height:0;
+    visibility:hidden;
+    overflow:hidden;
+}
