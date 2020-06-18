@@ -10,7 +10,7 @@ const {
   Banner,
   Channel,
   User,
-  UserDetails,
+  UserDetail,
   ArtcleHome,
   ArtcleAdd,
   Home
@@ -32,7 +32,7 @@ class App extends Component {
                   <Route path='/home/artcle/home' component={ArtcleHome} exact />
                   <Route path='/home/artcle/add' component={ArtcleAdd} exact />
                   <Route path='/home/user' component={User} exact />
-                  <Route path='/home/user/userdetails' component={UserDetails} exact />
+                  <Route path='/home/user/userdetail' component={UserDetail} exact />
                   <Redirect to="/404" />
                   {/* <Redirect to='/home/user' from="/home" exact /> */}
                   {/* <Route path='/' component={Home} /> */}

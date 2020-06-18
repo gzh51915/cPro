@@ -40,8 +40,8 @@ const User = Loadable({
     loader: () => import('../view/User'),
     loading: Loading,
 }); 
-const UserDetails = Loadable({
-    loader: () => import('../view/UserDetails'),
+const UserDetail = Loadable({
+    loader: () => import('../view/UserDetail'),
     loading: Loading,
 }); 
 const NotFound = Loadable({
@@ -68,7 +68,7 @@ export default {
     Banner,
     Channel,
     User,
-    UserDetails,
+    UserDetail,
     NotFound,
     ArtcleHome,
     ArtcleAdd

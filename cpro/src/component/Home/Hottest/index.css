@@ -1,0 +1,14 @@
+.hot_list{
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E9E9E9;
+}
+
+.weekly{
+    margin:10px;
+}
+.selected{
+   color: #009A61;
+   font-weight: bold;
+}

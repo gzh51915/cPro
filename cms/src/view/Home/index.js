@@ -3,34 +3,9 @@ import { Card } from 'antd';
 import {UserOutlined,EyeOutlined,MessageOutlined,FormOutlined} from '@ant-design/icons'
 import './index.scss'
 import echarts from 'echarts'
+import getMonth from '../../utils/getMonth'
 
-// 计算截至目前的6个月（不包括当前月份）
-function getMonth (){
-    let date = new Date()
-    let year = date.getFullYear()
-    let month = date.getMonth()
-    let maxMonth = year+'/'+month
-    let minMonth = year+'/'+(month-6)
-    let arrayMonth = []
-    let monthCopy = month
-    for(var i = 0 ; i < 6 ; i++){
-        arrayMonth.push(monthCopy+'月')
-        monthCopy--
-    }
-    if(month-6<0){
-        minMonth=(year-1)+'/'+(12-(6-month-1))
-        let min = 12-(6-month-1)
-        arrayMonth=[]
-        for(i = 0 ; i < 6 ; i++){
-            arrayMonth.push(min+'月')
-            if(min===12){
-                min=0   
-            }
-            min++
-        }
-    }
-    return {minMonth,maxMonth,arrayMonth}
-}
+
 
 function getOption(data){
     var option =  {
@@ -42,7 +17,7 @@ function getOption(data){
             axisPointer: {
                 type: 'cross',
                 label: {
-                    backgroundColor: '#6a7985'
+                    backgroundColor:`#6a7985`
                 }
             }
         },
@@ -84,9 +59,11 @@ function getOption(data){
                     }
                 },
                 areaStyle: {},
-                data: data.num
+                data: data.num,
+                color:[data.background]
             }
-        ]
+        ],
+
     };
     return option
 }
@@ -102,8 +79,9 @@ export default class Home extends Component {
 
     initArticleChartOne=()=>{
             let data={
-                title:"总用户量",
-                num:[300056, 322222, 356864, 415195, 449153, 501122, 545123]
+                title:"用户数量",
+                num:[300056, 322222, 356864, 415195, 449153, 501122, 545123],
+                background:"#fa5a5a"
             }
             var option =  getOption(data)
             // 使用刚指定的配置项和数据显示图表。
@@ -112,33 +90,30 @@ export default class Home extends Component {
     }
     initArticleChartTwo=()=>{
             let data={
-                title:"总访问量",
-                num:[265541, 329262, 192542, 225541, 325541, 401122, 206549]
+                title:"访问数量",
+                num:[265541, 329262, 192542, 225541, 325541, 401122, 206549],
+                background:"#82c8a0"
             }
             var option =  getOption(data)
-            // 使用刚指定的配置项和数据显示图表。
             this.articleChartTwo.setOption(option);
-        // })
     }
     initArticleChartThree=()=>{
             let data={
-                title:"文章总量",
-                num:[2567, 2654, 2865, 2955, 3066, 3153, 3252]
+                title:"文章数量",
+                num:[2567, 2654, 2865, 2955, 3066, 3153, 3252],
+                background:"#7fccde"
             }
             var option =  getOption(data)
-            // 使用刚指定的配置项和数据显示图表。
             this.articleAmountThree.setOption(option);
-        // })
     }
     initArticleChartFour=()=>{
             let data={
-                title:"问答总量",
-                num:[868, 954, 1154, 1234, 1352, 1532, 1666]
+                title:"问答数量",
+                num:[868, 954, 1154, 1234, 1352, 1532, 1666],
+                background:"#6698cb"
             }
             var option =  getOption(data)
-            // 使用刚指定的配置项和数据显示图表。
             this.articleAmountFour.setOption(option);
-        // })
     }
 
     componentDidMount(){

@@ -1,7 +1,7 @@
 import React, { Component} from 'react'
 import {Card ,Descriptions, Badge } from 'antd'
 
-export default class UserDetails extends Component {
+export default class UserDetail extends Component {
     render() {
         return (
             <Card title="用户信息详情" bordered={false} style={{ width: "100%" }}>

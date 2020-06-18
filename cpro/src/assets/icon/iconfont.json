@@ -1,0 +1,107 @@
+{
+  "id": "1885255",
+  "name": "crop",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "399066",
+      "name": "thumbs-up",
+      "font_class": "thumbsup",
+      "unicode": "e6e6",
+      "unicode_decimal": 59110
+    },
+    {
+      "icon_id": "1261983",
+      "name": "pencil-square",
+      "font_class": "pencil-square",
+      "unicode": "e6db",
+      "unicode_decimal": 59099
+    },
+    {
+      "icon_id": "1262109",
+      "name": "server",
+      "font_class": "server",
+      "unicode": "e6f5",
+      "unicode_decimal": 59125
+    },
+    {
+      "icon_id": "1440911",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "4765735",
+      "name": "play-circle",
+      "font_class": "play-circle",
+      "unicode": "e781",
+      "unicode_decimal": 59265
+    },
+    {
+      "icon_id": "4789373",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "5288599",
+      "name": "下拉",
+      "font_class": "xiala",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "6289726",
+      "name": "个人",
+      "font_class": "geren",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "7141775",
+      "name": "bookmark",
+      "font_class": "bookmark",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "11749444",
+      "name": "放大镜",
+      "font_class": "fangdajing",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "12215126",
+      "name": "global",
+      "font_class": "global",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "12693057",
+      "name": "newspaper",
+      "font_class": "newspaper",
+      "unicode": "e829",
+      "unicode_decimal": 59433
+    },
+    {
+      "icon_id": "14456895",
+      "name": "下 拉",
+      "font_class": "shang",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "15282886",
+      "name": "问答",
+      "font_class": "wenda",
+      "unicode": "e6f0",
+      "unicode_decimal": 59120
+    }
+  ]
+}
