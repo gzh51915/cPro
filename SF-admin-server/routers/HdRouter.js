@@ -4,6 +4,7 @@ const md5 =require('blueimp-md5')
 
 const AdminModule=require('../modules/AdminModule')
 const UserModule=require('../modules/UserModule')
+const ArtcleModule=require('../modules/ArtcleModule')
 
 const JwtUtil =require('../utils/jwt')
 
@@ -62,5 +63,31 @@ router.get('/users',(req,res)=>{
         
     })
 })
+
+//增加文章
+router.post('/artcle/add',(req,res)=>{
+    const artcle=req.body
+    ArtcleModule.create(artcle).then(artcle=>{
+        res.send({status:0,data:artcle})
+    }).catch(error=>{
+        console.error('添加文章异常', error)
+      res.send({status: 1, msg: '添加文章异常, 请重新尝试'})
+    })
+})
+
+//删除文章
+router.post('/artcle/delete', (req, res) => {
+    const {id:_id} = req.body
+    console.log('req.body: ', req.body);
+
+    console.log(_id);
+    
+    ArtcleModule.deleteOne({_id})
+      .then((doc) => {
+          console.log('doc: ', doc);
+        res.send({status: 0,msg:"删除成功"})
+      }).catch(err=>{console.log(err);
+      })
+  })
 
 module.exports=router

@@ -17,3 +17,11 @@ export const reqUserList = ()=>{
 export const reqIcons = ()=>{
     return axios.get('/icon')
 }
+
+export const reqArtcleAdd = (data)=>{
+    return axios.post('/artcle/add',data)
+}
+
+export const reqArtcleDelete = (id)=>{
+    return axios.post('/artcle/delete',{id})
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Button, Table, Modal, message,Tag } from 'antd';
-import {reqArtcle,reqIcons} from '../../api'
+import {reqArtcle,reqIcons,reqArtcleDelete} from '../../api'
 import { formateDate} from '../../utils/dateUtils'
 import {PAGE_SIZE} from '../../utils/constants'
 
@@ -16,11 +16,21 @@ export default class ArtcleHome extends Component {
     //获取标签
     getIcons = async () => {
         const result = await reqIcons()
-        console.log('result: ', result);
         if (result.status === 0) {
             this.setState({
                 icons: result.data
             })
+        }
+    }
+
+    //删除文章
+    deleteArtcle=async(id)=>{
+        const result=await reqArtcleDelete(id)
+        if(result.status===0){
+            message.success('文章删除成功')
+            this.getArtcles()
+        }else{
+            message.error('文章删除失败！！!')
         }
     }
 
@@ -92,10 +102,10 @@ export default class ArtcleHome extends Component {
             }, {
                 title: "操作",
                 width: 200,
-                render: () => {
+                render: (item) => {
                     return (
                         <span>
-                            <Button type="dashed">删除</Button>
+                            <Button type="primary" danger style={{marginRight:10}} onClick={()=>this.deleteArtcle(item._id)}>删除</Button>
                             <Button type='primary'>修改</Button>
                         </span>
                     )

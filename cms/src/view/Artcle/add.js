@@ -1,27 +1,35 @@
-import React, { Component } from 'react'
-// import * as React from 'react'
-// import * as ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import MarkdownIt from 'markdown-it'
 import MdEditor from 'react-markdown-editor-lite'
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
-import { reqUserList, reqIcons } from '../../api'
+import { reqUserList, reqIcons,reqArtcleAdd } from '../../api'
 import {
     Card,
     Form,
     Input,
     Select,
+    Button,
+    message
 
 } from 'antd';
 
 const { Item } = Form
 const { Option } = Select;
 
-export default class ArtcleAddUpdate extends Component {
+export default class ArtcleAddUpdate extends React.Component {
+    mdParser =null
+    constructor(props){
+        super(props)
+        this.mdParser=new MarkdownIt()
+    }
 
     state = ({
         userlist: [],
-        icons: []
+        icons: [],
+        content:''
+        
     })
     //获取作者（用户）列表
     getUsers = async () => {
@@ -37,7 +45,6 @@ export default class ArtcleAddUpdate extends Component {
     //获取标签
     getIcons = async () => {
         const result = await reqIcons()
-        console.log('result: ', result);
         if (result.status === 0) {
             this.setState({
                 icons: result.data
@@ -45,36 +52,53 @@ export default class ArtcleAddUpdate extends Component {
         }
     }
 
+   
+
+    handleEditorChange=({ html, text })=> {
+        this.setState({
+            content:html
+          });
+        
+    }
+
+    onFinish=async(value)=>{
+        value.content=this.state.content
+        const {icons}=this.state
+        const results =icons.filter((i)=>i.name==value.label)
+        if(results.length>=1){
+            value.label=results[0]._id
+        }
+        const result =await reqArtcleAdd(value)
+        if(result.status===0){
+            message.success('添加文章成功')
+            this.props.history.push('/home/artcle')
+        }else{
+            message.error('添加文章失败')
+        }
+    }
 
     componentDidMount() {
         this.getUsers()
         this.getIcons()
     }
     render() {
-        const mdParser = new MarkdownIt(/* Markdown-it options */);
 
-        // Finish!
-        function handleEditorChange({ html, text }) {
-            console.log('handleEditorChange', html, text)
-        }
-
+        const plugins = ['header', 'fonts', 'table', 'my-plugins', 'link', 'clear', 'logger', 'mode-toggle', 'full-screen'];
 
         const layout = {
             labelCol: { span: 2 },
             wrapperCol: { span: 10 },
         };
 
+        const tailLayout = {
+            wrapperCol: { offset: 2, span: 16 },
+          };
+
         const { userlist, icons } = this.state
-
-
-
-        function handleChange(value) {
-            console.log(`selected ${value}`);
-        }
 
         return (
             <Card title='添加文章'>
-                <Form {...layout}>
+                <Form {...layout} onFinish={this.onFinish}>
                     <Item label='标题' name="title" rules={[{ required: true, message: '必须输入文章标题' }]}>
                         <Input placeholder='请输入文章标题' />
                     </Item>
@@ -93,9 +117,9 @@ export default class ArtcleAddUpdate extends Component {
                             }
                         </Select>
                     </Item>
-                    <Item label='标签' name='lable' rules={[{ required: true, message: '必须选择所属标签' }]}>
+                    <Item label='标签' name='label' rules={[{ required: true, message: '必须选择所属标签' }]}>
                         <Select
-                            name='lable'
+                            name='label'
                             showSearch
                             style={{ width: 200 }}
                             placeholder="请选择标签"
@@ -108,14 +132,18 @@ export default class ArtcleAddUpdate extends Component {
                             }
                         </Select>
                     </Item>
-                    <Item label='内容' name='content'>
-
-                        <MdEditor
-                            value=""
-                            style={{ height: "500px" }}
-                            renderHTML={(text) => mdParser.render(text)}
-                            onChange={handleEditorChange}
-                        />
+                    <Item label='内容' >
+                    <MdEditor
+                        
+                        plugins={plugins}
+                        value=''
+                        style={{ height: "500px",width:"600px"}}
+                        renderHTML={(text) => this.mdParser.render(text)}
+                        onChange={this.handleEditorChange}
+                    />
+                    </Item>
+                    <Item {...tailLayout} >
+                        <Button type='primary' htmlType="submit">提交</Button>
                     </Item>
                 </Form>
             </Card>
