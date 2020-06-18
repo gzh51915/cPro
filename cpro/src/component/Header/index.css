@@ -1,4 +1,5 @@
 .nav{
+    width: 100%;
     display: flex;
     align-items: center;
     height: 44px;
@@ -6,14 +7,30 @@
     border-top: 3px solid #009A61;
     border-bottom: 1px solid #D9D9D9;
     margin-bottom: 30px;
+    box-shadow: 0 -2px 15px 5px rgba(0,0,0,0.1) ;
+    justify-content: flex-start;
 }
-.nav a{
-    flex:1;
-    text-decoration: none;
+.nav i{
+    font-size:20px;
+    color: #666;
 }
-.nav a i{
-    margin: 0 15px;
-    padding: 0 13px;
-    font-size: 26px;
-    text-decoration: none;
+.nav_search{
+    width:18.5px;
+    height: 20px;
+    padding: 7px 10px;
+    margin: 5px 15px;
+}
+.nav_login{
+    width:15.7px;
+    height: 20px;
+    padding: 7px 10px;
+    margin: 5px 15px;
+}
+.nav_img{
+    flex: 1;
+    text-align: center;
+}
+.nav_img img{
+    width: 150px;
+    height: 30px;
 }
