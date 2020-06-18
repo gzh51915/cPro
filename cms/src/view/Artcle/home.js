@@ -1,17 +1,41 @@
 import React, { Component } from 'react'
-import { Card, Button, Table, Modal, message } from 'antd';
-import {reqArtcle} from '../../api'
+import { Card, Button, Table, Modal, message,Tag } from 'antd';
+import {reqArtcle,reqIcons,reqArtcleDelete} from '../../api'
 import { formateDate} from '../../utils/dateUtils'
-
+import {PAGE_SIZE} from '../../utils/constants'
 
 export default class ArtcleHome extends Component {
 
     state = {
         visible: false,
-        dataSource:[]
+        dataSource:[],
+        icons:[]
     }
 
-    async componentDidMount(){
+
+    //获取标签
+    getIcons = async () => {
+        const result = await reqIcons()
+        if (result.status === 0) {
+            this.setState({
+                icons: result.data
+            })
+        }
+    }
+
+    //删除文章
+    deleteArtcle=async(id)=>{
+        const result=await reqArtcleDelete(id)
+        if(result.status===0){
+            message.success('文章删除成功')
+            this.getArtcles()
+        }else{
+            message.error('文章删除失败！！!')
+        }
+    }
+
+    //获取文章列表
+    getArtcles = async () => {
         const result =await reqArtcle()
         if(result.status===0){
             const dataSource=result.data
@@ -21,6 +45,11 @@ export default class ArtcleHome extends Component {
         }else{
             message.error('请求文章失败！！')
         }
+    }
+
+    componentDidMount(){
+        this.getArtcles()
+        this.getIcons()
     }
 
     render() {
@@ -33,6 +62,20 @@ export default class ArtcleHome extends Component {
             {
                 title: '作者',
                 dataIndex: 'author'
+            }, {
+                title: "标签",
+                render: (item) => {
+                    const {icons}=this.state
+                    const result =icons.filter((i)=>i._id==item.label)
+                    let name
+                    if(result.length>=1){
+                        name=result[0].name
+                    }
+                   
+                    return (
+                    <Tag color="green">{name}</Tag>
+                    )
+                }
             },
             {
                 title: '阅读量',
@@ -59,10 +102,10 @@ export default class ArtcleHome extends Component {
             }, {
                 title: "操作",
                 width: 200,
-                render: () => {
+                render: (item) => {
                     return (
                         <span>
-                            <Button type="dashed">删除</Button>
+                            <Button type="primary" danger style={{marginRight:10}} onClick={()=>this.deleteArtcle(item._id)}>删除</Button>
                             <Button type='primary'>修改</Button>
                         </span>
                     )
@@ -72,15 +115,18 @@ export default class ArtcleHome extends Component {
 
         const {dataSource}=this.state
         return (
-            <Card title='添加文章' extra={<Button type="primary">添加文章</Button>}>
+            <Card title='文章管理' extra={<Button type="primary" onClick={()=>this.props.history.push('/home/artcle/add')}>添加文章</Button>}>
                 <Table 
                 columns={columns} 
                 dataSource={dataSource} 
                 bordered 
                 onChange={this.handleChange}
                 rowKey='_id'
+                pagination={{
+                    defaultPageSize:PAGE_SIZE,
+                    showQuickJumper:true,
+                }}
                 />
-                
             </Card>
         )
     }
