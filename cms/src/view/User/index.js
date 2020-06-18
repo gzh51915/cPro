@@ -135,7 +135,7 @@ export default class User extends Component {
                       onClick: ()=> {
                         console.log(record);
                         console.log(this);
-                        this.props.history.push(`/home/userdetails?userid=${record.phone}`)
+                        this.props.history.push(`/home/user/userdetails?userid=${record.phone}`)
                       }
                     }
                   }}

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom'
 
 import { Layout, Menu, Breadcrumb ,Modal, Button} from 'antd';
-import { UserOutlined ,AreaChartOutlined ,CarryOutOutlined ,CoffeeOutlined ,QrcodeOutlined,NotificationOutlined} from '@ant-design/icons';
+import { UserOutlined ,AreaChartOutlined ,CarryOutOutlined ,CoffeeOutlined ,QrcodeOutlined,NotificationOutlined,HomeOutlined} from '@ant-design/icons';
 import logo from './logo.png'
 
 import {connect} from 'react-redux'
@@ -96,7 +96,8 @@ class index extends Component {
                     style={{ height: '100%', borderRight: 0 }}
                     onClick = {this.jumpContent}
                     >
-                        <Menu.Item icon={<UserOutlined />} key="/home">用户管理</Menu.Item>
+                        <Menu.Item icon={<HomeOutlined />} key="/home">首页</Menu.Item>
+                        <Menu.Item icon={<UserOutlined />} key="/home/user">用户管理</Menu.Item>
                         <SubMenu key="/article" icon={<NotificationOutlined />} title="文章">
                             <Menu.Item icon={<AreaChartOutlined /> } key="/home/artcle/home">文章管理</Menu.Item>
                             <Menu.Item icon={<AreaChartOutlined /> } key="/home/artcle/add">评论管理</Menu.Item>
