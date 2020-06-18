@@ -1,17 +1,31 @@
 import React, { Component } from 'react'
-import { Card, Button, Table, Modal, message } from 'antd';
-import {reqArtcle} from '../../api'
+import { Card, Button, Table, Modal, message,Tag } from 'antd';
+import {reqArtcle,reqIcons} from '../../api'
 import { formateDate} from '../../utils/dateUtils'
-
+import {PAGE_SIZE} from '../../utils/constants'
 
 export default class ArtcleHome extends Component {
 
     state = {
         visible: false,
-        dataSource:[]
+        dataSource:[],
+        icons:[]
     }
 
-    async componentDidMount(){
+
+    //获取标签
+    getIcons = async () => {
+        const result = await reqIcons()
+        console.log('result: ', result);
+        if (result.status === 0) {
+            this.setState({
+                icons: result.data
+            })
+        }
+    }
+
+    //获取文章列表
+    getArtcles = async () => {
         const result =await reqArtcle()
         if(result.status===0){
             const dataSource=result.data
@@ -21,6 +35,11 @@ export default class ArtcleHome extends Component {
         }else{
             message.error('请求文章失败！！')
         }
+    }
+
+    componentDidMount(){
+        this.getArtcles()
+        this.getIcons()
     }
 
     render() {
@@ -33,6 +52,20 @@ export default class ArtcleHome extends Component {
             {
                 title: '作者',
                 dataIndex: 'author'
+            }, {
+                title: "标签",
+                render: (item) => {
+                    const {icons}=this.state
+                    const result =icons.filter((i)=>i._id==item.label)
+                    let name
+                    if(result.length>=1){
+                        name=result[0].name
+                    }
+                   
+                    return (
+                    <Tag color="green">{name}</Tag>
+                    )
+                }
             },
             {
                 title: '阅读量',
@@ -72,15 +105,18 @@ export default class ArtcleHome extends Component {
 
         const {dataSource}=this.state
         return (
-            <Card title='添加文章' extra={<Button type="primary">添加文章</Button>}>
+            <Card title='文章管理' extra={<Button type="primary" onClick={()=>this.props.history.push('/home/artcle/add')}>添加文章</Button>}>
                 <Table 
                 columns={columns} 
                 dataSource={dataSource} 
                 bordered 
                 onChange={this.handleChange}
                 rowKey='_id'
+                pagination={{
+                    defaultPageSize:PAGE_SIZE,
+                    showQuickJumper:true,
+                }}
                 />
-                
             </Card>
         )
     }

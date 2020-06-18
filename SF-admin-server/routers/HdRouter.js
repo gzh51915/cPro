@@ -3,7 +3,7 @@ const md5 =require('blueimp-md5')
 
 
 const AdminModule=require('../modules/AdminModule')
-const IconModule=require('../modules/IconModule')
+const UserModule=require('../modules/UserModule')
 
 const JwtUtil =require('../utils/jwt')
 
@@ -13,8 +13,9 @@ const router = express.Router()
 // CORS
 router.use((req, res, next) => {
         res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+        res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With,token");
         res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    // res.setHeader("Access-Control-Allow-Headers", "Content-Type,token");
     
         // 跨域请求CORS中的预请求
         if(req.method=="OPTIONS") {
@@ -49,6 +50,17 @@ router.post('/admin/login',(req,res)=>{
 
 router.get('/test',(req,res)=>{
        res.send({status:0,mag:'测试'})
+})
+
+//获取所有用户
+router.get('/users',(req,res)=>{
+    UserModule.find().then(user=>{
+       res.send({status:0,data:user})
+    }).catch(error=>{
+        console.log('用户获取异常',error);
+        res.send({status:1,msg:'用户获取异常，请重新尝试'})
+        
+    })
 })
 
 module.exports=router

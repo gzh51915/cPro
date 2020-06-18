@@ -6,8 +6,14 @@ export const userLogin = (data)=>{
     })
 }
 
-export const reqArtcle = (data)=>{
-    return axios.get('/artcle',{
-        ...data
-    })
+export const reqArtcle = ()=>{
+    return axios.get('/artcle')
+}
+
+export const reqUserList = ()=>{
+    return axios.get('/users')
+}
+
+export const reqIcons = ()=>{
+    return axios.get('/icon')
 }

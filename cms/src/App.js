@@ -10,7 +10,6 @@ const {
   Banner,
   Channel,
   User,
-  Artcle,
   UserDetails,
   ArtcleHome,
   ArtcleAdd,
@@ -27,9 +26,9 @@ class App extends Component {
                   <Route path='/home/activity' component={Activity} exact/>
                   <Route path='/home/answer' component={Answer} exact />
                   <Route path='/home/banner' component={Banner} exact />
-                  <Route path='/home/artcle' component={Artcle} exact />
+                  {/* <Route path='/home/artcle' component={Artcle} exact /> */}
                   <Route path='/home/channel' component={Channel} exact />
-                  <Route path='/home/artcle/home' component={ArtcleHome} exact />
+                  <Route path='/home/artcle' component={ArtcleHome} exact />
                   <Route path='/home/artcle/add' component={ArtcleAdd} exact />
                   <Route path='/home' component={User} exact />
                   <Route path='/home/user/UserDetails' component={UserDetails} exact />

@@ -61,8 +61,8 @@ class index extends Component {
                     >
                         <Menu.Item icon={<UserOutlined />} key="/home">用户管理</Menu.Item>
                         <SubMenu key="/article" icon={<NotificationOutlined />} title="文章">
-                            <Menu.Item icon={<AreaChartOutlined /> } key="/home/artcle/home">文章管理</Menu.Item>
-                            <Menu.Item icon={<AreaChartOutlined /> } key="/home/artcle/add">评论管理</Menu.Item>
+                            <Menu.Item icon={<AreaChartOutlined /> } key="/home/artcle">文章管理</Menu.Item>
+                            {/* <Menu.Item icon={<AreaChartOutlined /> } key="/home/artcle/add">评论管理</Menu.Item> */}
                         </SubMenu>
                         <Menu.Item icon={<AreaChartOutlined /> } key="/home/banner">轮播图管理</Menu.Item>
                         <Menu.Item icon={<CarryOutOutlined />} key="/home/answer">问答管理</Menu.Item>

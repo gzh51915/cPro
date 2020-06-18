@@ -48,13 +48,8 @@ const NotFound = Loadable({
     loader: () => import('../view/NotFound'),
     loading: Loading,
 }); 
-<<<<<<< HEAD
-const Artcle = Loadable({
-    loader: () => import('../view/Artcle/home'),
-=======
 const ArtcleAdd = Loadable({
     loader: () => import('../view/Artcle/add'),
->>>>>>> develop
     loading: Loading,
 }); 
 const ArtcleHome = Loadable({
