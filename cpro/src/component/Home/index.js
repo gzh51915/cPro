@@ -3,6 +3,7 @@ import Header from '../Header'
 import '../../assets/icon/iconfont.css'
 import './index.css'
 import Newlist from '../Newslist';
+
 class Home extends Component {
     render() {
         return (
