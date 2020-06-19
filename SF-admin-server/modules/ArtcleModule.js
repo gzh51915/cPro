@@ -8,6 +8,7 @@ const artcleSchema = new mongoose.Schema({
     good:{type:Number,default:0},
     label:{type:String,required:true},
     content:{type:String,required:true},
+    text:{type:String,required:true},
     create_time:{type:Number,default:Date.now},
 })
 

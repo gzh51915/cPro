@@ -12,7 +12,7 @@ class Jwt {
         let data=this.data;
         let token= jwt.sign({
             data,
-            exp:Math.floor(Date.now() / 1000) + (60 * 60)
+            exp:Math.floor(Date.now() / 1000) + (60 * 60*24)
         },cert)
         return token
     }

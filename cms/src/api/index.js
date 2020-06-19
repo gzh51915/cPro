@@ -7,11 +7,11 @@ export const userLogin = (data)=>{
     })
 }
 
-export const reqArtcle = (data)=>{
-    return axios.get('/artcle',{
-        ...data
-    })
-}
+// export const reqArtcle = (data)=>{
+//     return axios.get('/artcle',{
+//         ...data
+//     })
+// }
 
 // mock数据
 export const getUserData = ()=>{
@@ -20,6 +20,8 @@ export const getUserData = ()=>{
             "content-type":"application/json",
         }
     })
+}
+
 export const reqArtcle = ()=>{
     return axios.get('/artcle')
 }
@@ -38,4 +40,8 @@ export const reqArtcleAdd = (data)=>{
 
 export const reqArtcleDelete = (id)=>{
     return axios.post('/artcle/delete',{id})
+}
+
+export const reqArtcleUpdate = (data)=>{
+    return axios.post('/artcle/update',data)
 }
