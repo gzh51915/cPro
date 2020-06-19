@@ -1,15 +1,15 @@
 //文章
 const mongoose=require('mongoose')
 const artcleSchema = new mongoose.Schema({
-    title:String,
-    author:String,
-    read:Number,
-    collect:Number,
-    good:Number,
-    userid:Number,
-    label:String,
-    content:String,
-    crea_time:{type:Number,default:Date.now},
+    title:{type:String,required:true},
+    author:{type:String,required:true},
+    read:{type:Number,default:0},
+    collect:{type:Number,default:0},
+    good:{type:Number,default:0},
+    label:{type:String,required:true},
+    content:{type:String,required:true},
+    text:{type:String,required:true},
+    create_time:{type:Number,default:Date.now},
 })
 
 const ArtcleModule =mongoose.model('artcles',artcleSchema)
