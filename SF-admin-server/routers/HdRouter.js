@@ -94,7 +94,7 @@ router.post('/artcle/delete', (req, res) => {
 //更新文章
 router.post('/artcle/update',(req,res)=>{
     const artcle =req.body
-    ArtcleModule.findOneAndUpdate({_id:artcle._id},artcle).then(oldArtcle=>{
+    ArtcleModule.findByIdAndUpdate({_id:artcle._id},artcle).then(oldArtcle=>{
         const data =Object.assign(oldArtcle,artcle)
         res.send({status:0,data})
     }).catch(err=>{

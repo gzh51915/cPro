@@ -4,7 +4,7 @@ import MarkdownIt from 'markdown-it'
 import MdEditor from 'react-markdown-editor-lite'
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
-import { reqUserList, reqIcons,reqArtcleAdd } from '../../api'
+import { reqUserList, reqIcons,reqArtcleAdd,reqArtcleUpdate } from '../../api'
 import {
     Card,
     Form,
@@ -72,12 +72,26 @@ export default class ArtcleAddUpdate extends React.Component {
         if(results.length>=1){
             value.label=results[0]._id
         }
-        const result =await reqArtcleAdd(value)
-        if(result.status===0){
-            message.success('添加文章成功')
-            this.props.history.push('/home/artcle')
+        if(!this.update){
+
+            const result =await reqArtcleAdd(value)
+            if(result.status===0){
+                message.success('添加文章成功')
+                this.props.history.push('/home/artcle')
+            }else{
+                message.error('添加文章失败')
+            }
         }else{
-            message.error('添加文章失败')
+            value.content=this.artcle.content
+            value.text=this.artcle.text
+            value._id=this.artcle._id
+            const result =await reqArtcleUpdate(value)
+            if(result.status===0){
+                message.success('修改文章成功')
+                this.props.history.push('/home/artcle')
+            }else{
+                message.error('修改文章失败')
+            }
         }
     }
 

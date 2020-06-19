@@ -25,3 +25,7 @@ export const reqArtcleAdd = (data)=>{
 export const reqArtcleDelete = (id)=>{
     return axios.post('/artcle/delete',{id})
 }
+
+export const reqArtcleUpdate = (data)=>{
+    return axios.post('/artcle/update',data)
+}
