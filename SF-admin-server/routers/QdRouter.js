@@ -4,6 +4,7 @@ const md5=require('blueimp-md5')
 const IconModule=require('../modules/IconModule')
 const UserModule=require('../modules/UserModule')
 const ArtcleModule=require('../modules/ArtcleModule')
+const BannerModule=require('../modules/BannerModule')
 const JwtUtil =require('../utils/jwt')
 
 
@@ -106,6 +107,22 @@ router.post('/user/reg',(req,res)=>{
         res.send({status:1,msg:'注册异常，请重新尝试'})
     })
 })
+
+
+//轮播图获取
+router.get('/banner',(req,res)=>{
+    BannerModule.find().then(banner=>{
+        res.send({status:0,data:banner})
+     }).catch(error=>{
+         console.log('轮播图获取异常',error);
+         res.send({status:1,msg:'轮播图获取异常，请重新尝试'})
+         
+     })
+})
+
+
+
+
 
 require('./file-upload')(router)
 

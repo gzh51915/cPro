@@ -2,7 +2,7 @@
 const mongoose=require('mongoose')
 
 const iconSchema = new mongoose.Schema({
-    address:{type:Array,default:[]},
+    imgs:String,
     introduce:String,
 })
 

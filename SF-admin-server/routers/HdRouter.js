@@ -5,6 +5,7 @@ const md5 =require('blueimp-md5')
 const AdminModule=require('../modules/AdminModule')
 const UserModule=require('../modules/UserModule')
 const ArtcleModule=require('../modules/ArtcleModule')
+const BannerModule=require('../modules/BannerModule')
 
 const JwtUtil =require('../utils/jwt')
 
@@ -102,5 +103,30 @@ router.post('/artcle/update',(req,res)=>{
         res.send({status:1,msg:"文章更新异常，请重新尝试"})
     })
 })
+
+//轮播图修改
+router.post('/banner/update',(req,res)=>{
+    const banner =req.body
+    BannerModule.findByIdAndUpdate({_id:banner._id},banner).then(oldBanner=>{
+        const data =Object.assign(oldBanner,banner)
+        res.send({status:0,data})
+    }).catch(err=>{
+        console.log("更新轮播图异常",err)
+        res.send({status:1,msg:"轮播图更新异常，请重新尝试"})
+    })
+})
+
+
+//轮播图添加
+router.post('/banner/add',(req,res)=>{
+    const banner =req.body
+    BannerModule.create(banner).then(banner=>{
+        res.send({status:0,data:banner})
+    }).catch(err=>{
+        console.log("添加轮播图异常",err)
+        res.send({status:1,msg:"轮播图添加异常，请重新尝试"})
+    })
+})
+
 
 module.exports=router
