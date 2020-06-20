@@ -48,7 +48,7 @@ module.exports = function fileUpload(router){
                 status:0,
                 data:{
                     name:file.filename,
-                    url:"http://localhost:5000/upload/"+file.filename
+                    url:"http://10.3.135.6:5000/public/upload/"+file.filename
                 }
             })
         })
