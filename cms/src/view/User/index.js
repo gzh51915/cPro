@@ -7,34 +7,14 @@ import { SearchOutlined } from '@ant-design/icons';
 
 import { Card } from 'antd';
 
-const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-    },
-    {
-      key: '2',
-      name: 'Joe Black',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park',
-    },
-  ];
+import {getuserInfo} from '../../api'
 
-export default class User extends Component {
+import {connect} from 'react-redux'
+import {addUserInfo} from './store/actionCreator'
+
+import {formateDate} from '../../utils/dateUtils'
+
+class User extends Component {
     constructor(){
         super()
         this.state = {
@@ -42,7 +22,29 @@ export default class User extends Component {
             searchedColumn: '',
         };
     }
+    componentDidMount(){
+      getuserInfo().then(res=>{
+        console.log(res);
+        if(res.status===0){
 
+          let data = res.data
+
+          data=data.map(item=>{
+            return {
+              ...item,
+              time:formateDate(item.crea_time)
+            }
+          })
+
+          this.setState({
+            userData:data
+          })
+
+          this.props.addData(data)
+
+        }
+      })
+    }
     getColumnSearchProps = dataIndex => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
           <div style={{ padding: 8 }}>
@@ -109,39 +111,68 @@ export default class User extends Component {
     render() {
         const columns = [
             {
-              title: 'Name',
-              dataIndex: 'name',
-              key: 'name',
-              width: '20%',
-              ...this.getColumnSearchProps('name'),
+              title: '用户名',
+              dataIndex: 'username',
+              key: 'username',
+              width: '15%',
+              ...this.getColumnSearchProps('username'),
             },
             {
-              title: 'Age',
-              dataIndex: 'age',
-              key: 'age',
-              width: '20%',
-              ...this.getColumnSearchProps('age'),
+              title: '居住地',
+              dataIndex: 'liveCity',
+              key: 'liveCity',
+              width: '15%',
+              // ...this.getColumnSearchProps('liveCity'),
             },
             {
-              title: 'Address',
-              dataIndex: 'address',
-              key: 'address',
-              ...this.getColumnSearchProps('address'),
+              title: '注册时间',
+              dataIndex: 'time',
+              key: 'time',
             },
-
-            
             {
-                title: 'Test',
-                dataIndex: 'test',
-                key: 'test',
-                sorter: (a, b) => a.age - b.age,
+              title: '地址',
+              dataIndex: 'network',
+              key: 'network',
+              // ...this.getColumnSearchProps('network'),
+            },
+            {
+                title: '介绍',
+                dataIndex: 'desc',
+                key: 'desc',
             },
         ];
 
         return (
             <Card title="用户信息" bordered={false} style={{ width: '100%' }}>
-                <Table columns={columns} dataSource={data} />
+                <Table 
+                  columns={columns} 
+                  dataSource={this.state.userData}
+                  rowKey="_id"
+                  onRow={record => { 
+                    return {
+                      onClick: ()=> {
+                        this.props.history.push(`/home/user/userdetail/${record._id}`)
+                      }
+                    }
+                  }}
+                />
             </Card>
         )
     }
 }
+
+const mapState = (state)=>{
+  return {
+    userInfo:state.userInfo
+  }
+}
+
+const mapDispatch = (dispatch)=>{
+  return{
+      addData(data){
+          dispatch(addUserInfo(data))
+      }
+  }
+}
+
+export default connect(mapState,mapDispatch)(User)

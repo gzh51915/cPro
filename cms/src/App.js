@@ -10,9 +10,11 @@ const {
   Banner,
   Channel,
   User,
-  UserDetails,
+  UserDetail,
   ArtcleHome,
   ArtcleAdd,
+  Home,
+  Bannerchange
 } = router
 
 class App extends Component {
@@ -23,15 +25,17 @@ class App extends Component {
             <Layout>
               <Switch>
                   {/* <Route path='/home' component={Home} exact /> */}
+                  <Route path='/home' component={Home} exact />
                   <Route path='/home/activity' component={Activity} exact/>
                   <Route path='/home/answer' component={Answer} exact />
                   <Route path='/home/banner' component={Banner} exact />
+                  <Route path='/home/banner/change/:id' component={Bannerchange} exact />
                   {/* <Route path='/home/artcle' component={Artcle} exact /> */}
                   <Route path='/home/channel' component={Channel} exact />
                   <Route path='/home/artcle' component={ArtcleHome} exact />
                   <Route path='/home/artcle/add' component={ArtcleAdd} exact />
-                  <Route path='/home' component={User} exact />
-                  <Route path='/home/user/UserDetails' component={UserDetails} exact />
+                  <Route path='/home/user' component={User} exact />
+                  <Route path='/home/user/userdetail/:id' component={UserDetail} exact />
                   <Redirect to="/404" />
                   {/* <Redirect to='/home/user' from="/home" exact /> */}
                   {/* <Route path='/' component={Home} /> */}

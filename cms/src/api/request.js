@@ -16,6 +16,7 @@ service.interceptors.request.use(config=>{
 })
 
 service.interceptors.response.use(res=>{
+    
     return res.data
 })
 

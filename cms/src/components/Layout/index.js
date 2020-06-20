@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import {withRouter} from 'react-router-dom'
 
-import { Layout, Menu, Breadcrumb } from 'antd';
-import { UserOutlined ,AreaChartOutlined ,CarryOutOutlined ,CoffeeOutlined ,QrcodeOutlined,NotificationOutlined} from '@ant-design/icons';
+import { Layout, Menu, Breadcrumb ,Modal, Button} from 'antd';
+import { UserOutlined ,AreaChartOutlined ,CarryOutOutlined ,CoffeeOutlined ,QrcodeOutlined,NotificationOutlined,HomeOutlined} from '@ant-design/icons';
 import logo from './logo.png'
 
 import {connect} from 'react-redux'
@@ -18,15 +18,37 @@ class index extends Component {
     constructor(props){
         super(props)
         this.state={
-            path:this.props.location.pathname
+            path:this.props.location.pathname,
+            // 是否显示确认退出
+            visible: false
         }
     }
-    // 退出登陆
-    quitLogin = ()=>{
+    // 退出登录交互窗口
+    showModal = () => {
+        this.setState({
+          visible: true,
+        });
+    };
+    handleOk = e => {
+        this.setState({
+          visible: false,
+        });
         this.props.quitLoginBtn()
-        localStorage.setItem("CPRO_TOKEN",'')
+        sessionStorage.setItem("CPRO_TOKEN",'')
         this.props.history.push('/login')
-    }
+    };
+
+    handleCancel = e => {
+        this.setState({
+            visible: false,
+        });
+    };
+    // 退出登陆
+    // quitLogin = ()=>{
+        // this.props.quitLoginBtn()
+        // localStorage.setItem("CPRO_TOKEN",'')
+        // this.props.history.push('/login')
+    // }
     // 导航跳转
     jumpContent = (item)=>{
         this.props.history.push(item.key)
@@ -39,7 +61,7 @@ class index extends Component {
         // }
     }
     render() {
-        console.log(this.props.location.pathname);
+        // console.log(this.props.location.pathname);
         return (
             <Layout className="bigbox">
                 <Header className="header">
@@ -47,7 +69,22 @@ class index extends Component {
                         <img src={logo} alt="" />
                     </div>
                     <div>
-                        <a onClick={this.quitLogin}>退出登陆</a>
+                        {/* <a onClick={this.quitLogin}>退出登陆</a> */}
+                        <Button type="primary" onClick={this.showModal}>
+                            退出登录
+                        </Button>
+                        <Modal
+                            title="退出"
+                            visible={this.state.visible}
+                            onOk={this.handleOk}
+                            onCancel={this.handleCancel}
+                            style={{fontSize:15}}
+                            width={450}
+                            cancelText="点错了"
+                            okText="是的"
+                        >
+                            <h3 style={{fontSize:18 , color:'red'}}>亲，您确定要退出嘛?</h3>
+                        </Modal>
                     </div>
                 </Header>
                 <Layout>
@@ -59,7 +96,8 @@ class index extends Component {
                     style={{ height: '100%', borderRight: 0 }}
                     onClick = {this.jumpContent}
                     >
-                        <Menu.Item icon={<UserOutlined />} key="/home">用户管理</Menu.Item>
+                        <Menu.Item icon={<HomeOutlined />} key="/home">首页</Menu.Item>
+                        <Menu.Item icon={<UserOutlined />} key="/home/user">用户管理</Menu.Item>
                         <SubMenu key="/article" icon={<NotificationOutlined />} title="文章">
                             <Menu.Item icon={<AreaChartOutlined /> } key="/home/artcle">文章管理</Menu.Item>
                             {/* <Menu.Item icon={<AreaChartOutlined /> } key="/home/artcle/add">评论管理</Menu.Item> */}

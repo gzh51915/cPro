@@ -1,0 +1,31 @@
+.nav-bar ul{
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    font-size: 14px;
+    justify-content: space-around;
+    height: 48px;
+    background-color: #FAFAFA;
+    z-index: 10;
+    border-top: 1px solid #E6E6E6;
+}
+.nav-bar ul li{
+    width: 100%;
+}
+.nav-bar ul li a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color:#9e9e9e; 
+    padding-top: 6px;
+}
+.nav-bar ul li a i{
+    margin-bottom: 6px;
+}
+.nav-bar ul li .selected{
+    color:#009a61;
+}
+
+.nav-bar ul li i{font-size: 20px;}
