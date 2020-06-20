@@ -56,6 +56,10 @@ const ArtcleHome = Loadable({
     loader: () => import('../view/Artcle/home'),
     loading: Loading,
 }); 
+const Bannerchange = Loadable({
+    loader: () => import('../view/Banner/change'),
+    loading: Loading,
+}); 
 
 
 
@@ -66,6 +70,7 @@ export default {
     Activity,
     Answer,
     Banner,
+    Bannerchange,
     Channel,
     User,
     UserDetail,

@@ -7,9 +7,14 @@ import { SearchOutlined } from '@ant-design/icons';
 
 import { Card } from 'antd';
 
-import {getUserData} from '../../api'
+import {getuserInfo} from '../../api'
 
-export default class User extends Component {
+import {connect} from 'react-redux'
+import {addUserInfo} from './store/actionCreator'
+
+import {formateDate} from '../../utils/dateUtils'
+
+class User extends Component {
     constructor(){
         super()
         this.state = {
@@ -17,17 +22,29 @@ export default class User extends Component {
             searchedColumn: '',
         };
     }
-
     componentDidMount(){
-      getUserData().then(res=>{
-        if(res.data.code===200){
-          this.setState({
-            userData:res.data.data.user
+      getuserInfo().then(res=>{
+        console.log(res);
+        if(res.status===0){
+
+          let data = res.data
+
+          data=data.map(item=>{
+            return {
+              ...item,
+              time:formateDate(item.crea_time)
+            }
           })
+
+          this.setState({
+            userData:data
+          })
+
+          this.props.addData(data)
+
         }
       })
     }
-
     getColumnSearchProps = dataIndex => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
           <div style={{ padding: 8 }}>
@@ -95,33 +112,33 @@ export default class User extends Component {
         const columns = [
             {
               title: '用户名',
-              dataIndex: 'realname',
-              key: 'realname',
-              width: '20%',
-              ...this.getColumnSearchProps('realname'),
+              dataIndex: 'username',
+              key: 'username',
+              width: '15%',
+              ...this.getColumnSearchProps('username'),
             },
             {
-              title: '手机号',
-              dataIndex: 'phone',
-              key: 'phone',
-              width: '20%',
-              ...this.getColumnSearchProps('phone'),
+              title: '居住地',
+              dataIndex: 'liveCity',
+              key: 'liveCity',
+              width: '15%',
+              // ...this.getColumnSearchProps('liveCity'),
             },
             {
-              title: '性别',
-              dataIndex: 'gender',
-              key: 'gender',
+              title: '注册时间',
+              dataIndex: 'time',
+              key: 'time',
             },
             {
               title: '地址',
               dataIndex: 'network',
               key: 'network',
-              ...this.getColumnSearchProps('network'),
+              // ...this.getColumnSearchProps('network'),
             },
             {
-                title: '生日',
-                dataIndex: 'birth',
-                key: 'birth',
+                title: '介绍',
+                dataIndex: 'desc',
+                key: 'desc',
             },
         ];
 
@@ -130,12 +147,11 @@ export default class User extends Component {
                 <Table 
                   columns={columns} 
                   dataSource={this.state.userData}
+                  rowKey="_id"
                   onRow={record => { 
                     return {
                       onClick: ()=> {
-                        console.log(record);
-                        console.log(this);
-                        this.props.history.push(`/home/user/userdetail?userid=${record.phone}`)
+                        this.props.history.push(`/home/user/userdetail/${record._id}`)
                       }
                     }
                   }}
@@ -144,3 +160,19 @@ export default class User extends Component {
         )
     }
 }
+
+const mapState = (state)=>{
+  return {
+    userInfo:state.userInfo
+  }
+}
+
+const mapDispatch = (dispatch)=>{
+  return{
+      addData(data){
+          dispatch(addUserInfo(data))
+      }
+  }
+}
+
+export default connect(mapState,mapDispatch)(User)

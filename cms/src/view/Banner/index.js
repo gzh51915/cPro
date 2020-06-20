@@ -1,220 +1,107 @@
-import React, { Component ,useContext, useState, useEffect, useRef } from 'react'
-import { Card ,  Table, Input, Button, Popconfirm, Form} from 'antd';
+import React, { Component} from 'react'
+import { Table,Card ,Button,Modal,message} from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import './index.scss'
+import {getBannerData,deleteBanner} from '../../api'
 
-
-const EditableContext = React.createContext();
-
-const EditableRow = ({ index, ...props }) => {
-  const [form] = Form.useForm();
-  return (
-    <Form form={form} component={false}>
-      <EditableContext.Provider value={form}>
-        <tr {...props} />
-      </EditableContext.Provider>
-    </Form>
-  );
-};
-
-const EditableCell = ({
-    title,
-    editable,
-    children,
-    dataIndex,
-    record,
-    handleSave,
-    ...restProps
-  }) => {
-    const [editing, setEditing] = useState(false);
-    const inputRef = useRef();
-    const form = useContext(EditableContext);
-    useEffect(() => {
-      if (editing) {
-        inputRef.current.focus();
-      }
-    }, [editing]);
-  
-    const toggleEdit = () => {
-      setEditing(!editing);
-      form.setFieldsValue({
-        [dataIndex]: record[dataIndex],
-      });
-    };
-  
-    const save = async e => {
-      try {
-        const values = await form.validateFields();
-        toggleEdit();
-        handleSave({ ...record, ...values });
-      } catch (errInfo) {
-        console.log('Save failed:', errInfo);
-      }
-    };
-  
-    let childNode = children;
-  
-    if (editable) {
-      childNode = editing ? (
-        <Form.Item
-          style={{
-            margin: 0,
-          }}
-          name={dataIndex}
-          rules={[
-            {
-              required: true,
-              message: `${title} is required.`,
-            },
-          ]}
-        >
-          <Input ref={inputRef} onPressEnter={save} onBlur={save} />
-        </Form.Item>
-      ) : (
-        <div
-          className="editable-cell-value-wrap"
-          style={{
-            paddingRight: 24,
-          }}
-          onClick={toggleEdit}
-        >
-          {children}
-        </div>
-      );
-    }
-  
-    return <td {...restProps}>{childNode}</td>;
-};
+const { confirm } = Modal;
 
 
 export default class Banner extends Component {
-    constructor(props){
-        super(props);
-        this.columns = [
-            {
-              title: '地址',
-              dataIndex: 'address',
-              width: '40%',
-              editable: true,
-            },
-            {
-              title: '介绍',
-              dataIndex: 'introduce',
-              width: '40%',
-              editable: true,
-            },
-            {
-              title: 'operation',
-              dataIndex: 'operation',
-              render: (text, record) =>
-                this.state.dataSource.length >= 1 ? (
-                  <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-                    <p style={{color:"blue" , cursor:"pointer"}}>Delete</p>
-                  </Popconfirm>
-                ) : null,
-            },
-        ];
-        this.state = {
-            dataSource: [
-              {
-                key: '0',
-                introduce: 'Edward King 0',
-                address: 'London, Park Lane no. 0',
-              },
-              {
-                key: '1',
-                introduce: 'Edward King 1',
-                address: 'London, Park Lane no. 1',
-              },
-            ],
-            count: 2,
-          };
+  constructor(){
+    super()
+    this.state={
+      bannerData:[],
+      data:[]
     }
+  }
 
-    handleDelete = key => {
-        const dataSource = [...this.state.dataSource];
+  getData=()=>{
+    getBannerData().then(res=>{
+      if(res.status===0){
         this.setState({
-          dataSource: dataSource.filter(item => item.key !== key),
-        });
-    };
+          bannerData:res.data
+        })
+      }
+    })
+  }
 
-    handleAdd = () => {
-        const { count, dataSource } = this.state;
-        const newData = {
-          key: count,
-          name: `Edward King ${count}`,
-          age: 32,
-          address: `London, Park Lane no. ${count}`,
-        };
-        this.setState({
-          dataSource: [...dataSource, newData],
-          count: count + 1,
-        });
-    };
+  componentDidMount(){
+    this.getData()
+  }
+  updata=(data)=>{
+    this.props.history.push({pathname:'/home/banner/change/2',query:{
+      ...data
+    }})
+  }
+  delete=(data)=>{
+    var that = this
+    confirm({
+      title: '您确定要删除嘛？',
+      icon: <ExclamationCircleOutlined />,
+      content: '亲，删除后不可以恢复的哦!!!',
+      okText: '是的',
+      okType: 'danger',
+      cancelText: '手滑了',
+      onOk() {
+        console.log(data._id);
+        deleteBanner({_id:data._id}).then(res=>{
+          if(res.status===0){
+            message.info('删除成功！');
+            that.getData()
+          }
+        })
+      },
+    });
+  }
+  add=()=>{
+    this.props.history.push('/home/banner/change/1')
+  }
 
-    handleSave = row => {
-        const newData = [...this.state.dataSource];
-        const index = newData.findIndex(item => row.key === item.key);
-        const item = newData[index];
-        newData.splice(index, 1, { ...item, ...row });
-        this.setState({
-          dataSource: newData,
-        });
-    };
+  render() {
 
+    const columns = [
+      {
+        title: '介绍',
+        dataIndex: 'introduce',
+        key: 'introduce',
+        align:"center",
+        className:"table_box",
+      },
+      {
+        title: '图片',
+        dataIndex: 'imgs',
+        key: 'imgs',
+        align:"center",
+        className:"table_box",
+        render: (url) => <img src={"http://10.3.135.6:5000/public/upload/"+url} alt="" style={{width:'400px',height:'160px'}} />,
+      },
+      {
+        title: '操作',
+        key: 'action',
+        align:"center",
+        className:"table_box",
+        render: (data) => (
+          <div >
+            <Button type="primary" onClick={this.updata.bind(this,data)}>修改</Button>
+            <Button type="primary" danger onClick={this.delete.bind(this,data)}>删除</Button>
+          </div>
+        ),
+      },
+    ];
 
-
-    render() {
-        const { dataSource } = this.state;
-        const components = {
-            body: {
-              row: EditableRow,
-              cell: EditableCell,
-            },
-        };
-        const columns = this.columns.map(col => {
-            if (!col.editable) {
-              return col;
-            }
-      
-            return {
-              ...col,
-              onCell: record => ({
-                record,
-                editable: col.editable,
-                dataIndex: col.dataIndex,
-                title: col.title,
-                handleSave: this.handleSave,
-              }),
-            };
-        });
-
-        return (
-            <Card title="轮播图管理"
-                bordered={false} 
-                style={{ width: "100%" }} 
-            >
-                
-                <div>
-                    <Button
-                        onClick={this.handleAdd}
-                        type="primary"
-                        style={{
-                            marginBottom: 16,
-                        }}
-                    >
-                        添加
-                    </Button>
-                    <Table
-                        components={components}
-                        rowClassName={() => 'editable-row'}
-                        bordered
-                        dataSource={dataSource}
-                        columns={columns}
-                        pagination={false}
-                    />
-                </div>
-
-            </Card>
-        )
-    }
+      return (
+          <Card title="轮播图管理"
+              bordered={false} 
+              style={{ width: "100%" }} 
+              extra={<Button type="primary" onClick={this.add}>添加</Button>}
+          >
+            <Table 
+              columns={columns} 
+              dataSource={this.state.bannerData} 
+              rowKey='_id'
+            />
+          </Card>
+      )
+  }
 }
