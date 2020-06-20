@@ -87,6 +87,7 @@ export default class ArtcleAddUpdate extends React.Component {
             value._id=this.artcle._id
             const result =await reqArtcleUpdate(value)
             if(result.status===0){
+                console.log('result: ', result);
                 message.success('修改文章成功')
                 this.props.history.push('/home/artcle')
             }else{

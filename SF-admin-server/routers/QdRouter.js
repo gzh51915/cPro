@@ -107,4 +107,6 @@ router.post('/user/reg',(req,res)=>{
     })
 })
 
+require('./file-upload')(router)
+
 module.exports=router
