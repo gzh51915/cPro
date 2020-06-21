@@ -136,7 +136,7 @@ router.get('/questions',(req,res)=>{
 //相关回答查询
 router.post('/aswer',(req,res)=>{
     const {id}=req.body
-    console.log('id: ', id);
+    // console.log('id: ', id);
     AswersModule.find({"question_id":id}).then(aswer=>{
         res.send({status:0,data:aswer})
     }).catch(err=>{
@@ -148,7 +148,7 @@ router.post('/aswer',(req,res)=>{
 //增加问题
 router.post('/qusetion/add',(req,res)=>{
     const qusetion=req.body
-    console.log('qusetion: ', qusetion);
+    // console.log('qusetion: ', qusetion);
     QuestionModule.create(qusetion).then(qusetion=>{
         res.send({status:0,data:qusetion})
     }).catch(error=>{

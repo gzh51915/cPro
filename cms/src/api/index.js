@@ -73,3 +73,21 @@ export const getuserInfo = ()=>{
     return axios.get('/users')
 }
 
+export const reqQuestion = ()=>{
+    return axios.get('/questions')
+}
+
+export const reqQuestionUpdate = (data)=>{
+    return axios.post('/question/update',{
+        ...data
+    })
+}
+
+export const reqQuestionDelete = (id)=>{
+    return axios.post('/question/delete',{id})
+}
+
+
+export const reqAswer = (id)=>{
+    return axios.post('/aswer',{id})
+}

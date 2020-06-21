@@ -128,7 +128,7 @@ router.post('/banner/add',(req,res)=>{
 //轮播图删除
 router.post('/banner/delete',(req,res)=>{
     const {id:_id} =req.body
-    BannerModule.deleteOne(_id).then(banner=>{
+    BannerModule.deleteOne({_id}).then(banner=>{
         res.send({status:0,msg:'删除轮播图成功'})
     }).catch(err=>{
         console.log("删除轮播图异常",err)
@@ -152,7 +152,7 @@ router.post('/question/update',(req,res)=>{
 //更新回答
 router.post('/aswer/update',(req,res)=>{
     const aswer =req.body
-    console.log('aswer: ', aswer);
+    // console.log('aswer: ', aswer);
     AswersModule.findByIdAndUpdate({_id:aswer._id},aswer).then(oldAswer=>{
         const data =Object.assign(oldAswer,aswer)
         res.send({status:0,data})
@@ -164,23 +164,29 @@ router.post('/aswer/update',(req,res)=>{
 
 //问题删除
 router.post('/question/delete',(req,res)=>{
+    // console.log('req.body: ', req.body);
     const {id:_id} =req.body
-    QuestionModule.deleteOne(_id).then(banner=>{
-        res.send({status:0,msg:'删除问题成功'})
+    QuestionModule.deleteOne({_id}).then(question=>{
+        // console.log('question: ', question);
+        if(question){
+            AswersModule.deleteOne({question_id:_id}).then(aswer=>{
+                res.send({status:0,msg:'删除问题成功,且问题也已经删除'})
+            })
+        }
     }).catch(err=>{
         console.log("删除问题异常",err)
         res.send({status:1,msg:"问题删除异常，请重新尝试"})
     })
 })
 
-//回答删除
+//单个回答删除
 router.post('/aswer/delete',(req,res)=>{
     const {id:_id} =req.body
-    QuestionModule.deleteOne(_id).then(banner=>{
-        res.send({status:0,msg:'删除问题成功'})
+    AswersModule.deleteOne({_id}).then(aswer=>{
+        res.send({status:0,msg:'删除回答成功'})
     }).catch(err=>{
-        console.log("删除问题异常",err)
-        res.send({status:1,msg:"问题删除异常，请重新尝试"})
+        console.log("删除回答异常",err)
+        res.send({status:1,msg:"删除回答异常，请重新尝试"})
     })
 })
 

@@ -28,6 +28,12 @@ const Answer = Loadable({
     loader: () => import('../view/Answer'),
     loading: Loading,
 }); 
+
+const AnswerAddUpdate = Loadable({
+    loader: () => import('../view/Answer/add-update'),
+    loading: Loading,
+}); 
+
 const Banner = Loadable({
     loader: () => import('../view/Banner'),
     loading: Loading,
@@ -61,6 +67,10 @@ const Bannerchange = Loadable({
     loading: Loading,
 }); 
 
+const Aswer = Loadable({
+    loader: () => import('../view/Answer/aswer'),
+    loading: Loading,
+}); 
 
 
 
@@ -69,6 +79,8 @@ export default {
     Home,
     Activity,
     Answer,
+    Aswer,
+    AnswerAddUpdate,
     Banner,
     Bannerchange,
     Channel,

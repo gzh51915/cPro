@@ -24,7 +24,7 @@ class User extends Component {
     }
     componentDidMount(){
       getuserInfo().then(res=>{
-        console.log(res);
+        // console.log(res);
         if(res.status===0){
 
           let data = res.data
