@@ -1,6 +1,5 @@
 import React, { Component} from 'react'
 import {Card ,Descriptions, Badge ,Button} from 'antd'
-
 import {connect} from 'react-redux'
 
 class UserDetail extends Component {
@@ -32,6 +31,8 @@ class UserDetail extends Component {
     render() {
         const data = this.state.data
         const userInfo = data[0]
+
+
         return (
             <Card title="用户信息详情" bordered={false} style={{ width: "100%" }}  extra={<Button type="primary" onClick={this.back}>返回</Button>}>
                 {
