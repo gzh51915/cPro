@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import Getquestions from '../Getquestions'
 
 class index extends Component {
     render() {
         return (
             <div>
-                1
+            <Getquestions />
+
             </div>
         );
     }

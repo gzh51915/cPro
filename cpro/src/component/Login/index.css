@@ -1,0 +1,99 @@
+.login_bigbox{
+    background: rgba(99, 99, 99, 0.15);
+    height: 100%;
+    overflow: hidden;
+}
+
+.login{
+    padding: 0 12px;
+}
+
+.login_img{
+    width: 170px;
+    height: 35px;
+    position: relative;
+    margin: 30px auto 20px auto ;   
+}
+.login_img_zhe{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(120, 120, 120, 0.15);
+}
+.login_img img{
+    display: inline-block;
+    width: 170px;
+    height: 35px;
+    vertical-align: middle;
+}
+
+.login_box{
+   padding: 30px; 
+   background: #fff;
+}
+
+.login_box h2{
+    font-size: 28px;
+    color: #212529;
+    text-align: center;
+    width: 100%;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+.login_box .login_list{
+    display: flex;
+    justify-content: space-between;
+    height: 24px;
+    margin-bottom: 16px;
+    align-items: center;
+}
+.login_box .login_list li{
+    font-size: 16px;
+    color: #00965e;
+}
+.login_box .login_list .login_list_active{
+    color: #212529;
+}
+.login_box .login_list span{
+    color: #ddd;
+}
+
+.login_input{
+    width: 100%;
+    margin-bottom: 50px;
+}
+.login_input input{
+    width: 100%;
+    height: 40px;
+    padding: 8 16px;
+    border: 1px solid #ced4da;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+.login_input div{
+    text-align: right;
+    font-size: 16px;
+    color: #00965e;
+    margin-bottom: 15px;
+}
+.login .login_input .login_button{
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    background: #00965e;
+    border: 0;
+    color: #fff;
+}
+.login .login_input .login_button span{
+    color: #fff;
+}
+.login_test{
+    margin-top: 16px;
+    font-size: 14px;
+    color: #6c757d;
+}
+.login_test span{
+    color: #00965e;
+}

@@ -17,13 +17,41 @@
 }
 
 .course{
-    height: 200px;
+    position: relative;
+    padding:0 15px;
+    background-color: #FAFAFA;
+}
+.classrecommend{
+    padding: 15px 0 15px 15px;
+}
+.classtitle{
+    margin-bottom: 10px;
+    font-size: 16px;
 }
 
-.swiper-container{
-    height: 200px;
+.swiper-wrapper .swiper-slide{
+    width: 192px;
+    height: 220px;
+    text-align: center;
 }
-
-.swiper-slide{
-    height: 100px;
+.swiper-slide img{
+    border-radius: 6px;
+}
+.title{
+    padding: 4px 60px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px; 
+}
+.class_price{
+    margin-top: 8px;
+}
+.discountPrice{
+    color:#ED1C24 ;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 6px;
+}
+.price{
+    text-decoration: line-through;
 }

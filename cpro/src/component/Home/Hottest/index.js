@@ -6,7 +6,6 @@ import Monthly from './Monthly'
 import './index.css'
 
 
-
 class index extends Component {
     
 
@@ -25,6 +24,7 @@ class index extends Component {
                         <Route exact path="/hottest/monthly" component={Monthly}></Route>
                     </Switch>
                 </Router>
+                
             </div>
         );
     }
