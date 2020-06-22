@@ -7,25 +7,30 @@ import Hotanswer from './Hotanswer'
 import Getdata from './Getdata'
 import './index.css'
 import Swiper from 'swiper';
-import '../../../node_modules/swiper/css/swiper.min.css';
+import '../../../node_modules/swiper/css/swiper.css';
 class Question extends Component {
-    componentDidMount(){
-        new Swiper('.swiper-container',{
-            loop: true, 
-            autoplay:{      //自动播放，注意：直接给autoplay:true的话，在点击之后不能再自动播放了
-                delay: 3000,
-                disableOnInteraction: false,    //户操作swiper之后，是否禁止autoplay。默认为true：停止。
-            },
-            spaceBetween: 30,
-            navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-            },
-            observer:true,
-            observeParents:true,
-        });
+    componentDidMount() {
+        setTimeout(()=>{
+            new Swiper('.swiper-container', {
+                loop: true,
+                autoplay: {
+                    delay: 2000,
+                    stopOnLastSlide: false,
+                    disableOnInteraction: false,
+                },
+                spaceBetween:60,
+                slidesPerView: 1,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                  },
+                observer:true,
+                observeParents:true
+            });
+        },500)
+        
     }
-    
+
     render() {
         return (
             <div>
@@ -45,18 +50,23 @@ class Question extends Component {
                     </Router>
                 </div>
 
-              
-                <div className="course">
-                <div>课程推荐</div>
-                <div className="swiper-container" autoPlay>
-                <div className="swiper-wrapper">                
-                            <Getdata />
+                
+                <div className="course clear_fix">
+                    <div className="classrecommend">
+                        <div className="classtitle">课程推荐
+                    
                         </div>
-                        <div className="swiper-button-prev"></div>
-                        <div className="swiper-button-next"></div>
+                        <div className="swiper-container">
+                            <div className="swiper-wrapper">
+                            
+                            <Getdata />
+                            </div>
+                            <div className="swiper-button-prev"></div>
+                            <div className="swiper-button-next"></div>
                         </div>
                     </div>
                 </div>
+            </div>
         );
     }
 }

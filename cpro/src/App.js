@@ -1,15 +1,16 @@
 import React from 'react';
 import Tabbar from './component/Tabbar'
 import '../src/assets/css/index.css'
-function App() {
+import {BrowserRouter} from 'react-router-dom'
+function App() { 
   return (
-    <div className="App">
-      <Tabbar />
+    <BrowserRouter>
+      <div className="App">
+        <Tabbar />
 
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
 export default App;
- 
-

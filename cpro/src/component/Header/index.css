@@ -1,4 +1,5 @@
 .nav{
+    padding: 0 15px;
     display: flex;
     align-items: center;
     height: 44px;
@@ -6,14 +7,29 @@
     border-top: 3px solid #009A61;
     border-bottom: 1px solid #D9D9D9;
     margin-bottom: 30px;
-}
-.nav a{
-    flex:1;
     text-decoration: none;
+    list-style: none;
 }
-.nav a i{
+.nav div{
+    display: flex;
+    flex: 1;
+    
+}
+.nav div i{
     margin: 0 15px;
     padding: 0 13px;
     font-size: 26px;
     text-decoration: none;
+}
+.headright{
+    background-color: red;
+    border-radius: 50%;
+}
+.headlogo{
+    border-radius: 50%;
+    width: auto;  
+    height: auto;  
+    max-width: 100%;  
+    max-height: 100%;
+    object-fit: cover;
 }
