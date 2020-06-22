@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import MarkdownIt from 'markdown-it'
 import MdEditor from 'react-markdown-editor-lite'
 // import style manually
@@ -87,6 +86,7 @@ export default class ArtcleAddUpdate extends React.Component {
             value._id=this.artcle._id
             const result =await reqArtcleUpdate(value)
             if(result.status===0){
+                // console.log('result: ', result);
                 message.success('修改文章成功')
                 this.props.history.push('/home/artcle')
             }else{
@@ -177,7 +177,7 @@ export default class ArtcleAddUpdate extends React.Component {
                         
                         plugins={plugins}
                         value={text}
-                        style={{ height: "500px",width:"600px"}}
+                        style={{ height: "500px",width:"800px"}}
                         renderHTML={(text) => this.mdParser.render(text)}
                         onChange={this.handleEditorChange}
                     />

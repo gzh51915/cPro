@@ -7,9 +7,11 @@ import {connect} from 'react-redux'
 const {
   Activity,
   Answer,
+  AnswerAddUpdate,
   Banner,
   Channel,
   User,
+  Aswer,
   UserDetail,
   ArtcleHome,
   ArtcleAdd,
@@ -28,6 +30,8 @@ class App extends Component {
                   <Route path='/home' component={Home} exact />
                   <Route path='/home/activity' component={Activity} exact/>
                   <Route path='/home/answer' component={Answer} exact />
+                  <Route path='/home/answer/aswer' component={Aswer} exact />
+                  <Route path='/home/answer/addupdate' component={AnswerAddUpdate} exact />
                   <Route path='/home/banner' component={Banner} exact />
                   <Route path='/home/banner/change/:id' component={Bannerchange} exact />
                   {/* <Route path='/home/artcle' component={Artcle} exact /> */}

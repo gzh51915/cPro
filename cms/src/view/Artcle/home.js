@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Button, Table, Modal, message,Tag } from 'antd';
+import { Card, Button, Table, message,Tag } from 'antd';
 import {reqArtcle,reqIcons,reqArtcleDelete} from '../../api'
 import { formateDate} from '../../utils/dateUtils'
 import {PAGE_SIZE} from '../../utils/constants'
@@ -66,7 +66,7 @@ export default class ArtcleHome extends Component {
                 title: "标签",
                 render: (item) => {
                     const {icons}=this.state
-                    const result =icons.filter((i)=>i._id==item.label)
+                    const result =icons.filter((i)=>i._id===item.label)
                     let name
                     if(result.length>=1){
                         name=result[0].name

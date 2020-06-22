@@ -4,6 +4,9 @@ const md5=require('blueimp-md5')
 const IconModule=require('../modules/IconModule')
 const UserModule=require('../modules/UserModule')
 const ArtcleModule=require('../modules/ArtcleModule')
+const BannerModule=require('../modules/BannerModule')
+const QuestionModule=require('../modules/QuestionModule')
+const AswersModule=require('../modules/AswersModule')
 const JwtUtil =require('../utils/jwt')
 
 
@@ -106,5 +109,66 @@ router.post('/user/reg',(req,res)=>{
         res.send({status:1,msg:'注册异常，请重新尝试'})
     })
 })
+
+
+//轮播图获取
+router.get('/banner',(req,res)=>{
+    BannerModule.find().then(banner=>{
+        res.send({status:0,data:banner})
+     }).catch(error=>{
+         console.log('轮播图获取异常',error);
+         res.send({status:1,msg:'轮播图获取异常，请重新尝试'})
+         
+     })
+})
+
+
+//问题列表查询
+router.get('/questions',(req,res)=>{
+    QuestionModule.find().then(question=>{
+        res.send({status:0,data:question})
+    }).catch(err=>{
+        console.log('问题获取异常',err)
+        res.send({status:1,msg:"问题获取异常，请重新尝试"})
+    })
+})
+
+//相关回答查询
+router.post('/aswer',(req,res)=>{
+    const {id}=req.body
+    // console.log('id: ', id);
+    AswersModule.find({"question_id":id}).then(aswer=>{
+        res.send({status:0,data:aswer})
+    }).catch(err=>{
+        console.log('回答获取异常',err)
+        res.send({status:1,msg:"回答获取异常，请重新尝试"})
+    })
+})
+
+//增加问题
+router.post('/qusetion/add',(req,res)=>{
+    const qusetion=req.body
+    // console.log('qusetion: ', qusetion);
+    QuestionModule.create(qusetion).then(qusetion=>{
+        res.send({status:0,data:qusetion})
+    }).catch(error=>{
+        console.error('添加问题异常', error)
+      res.send({status: 1, msg: '添加问题异常, 请重新尝试'})
+    })
+})
+
+
+//增加回答
+router.post('/aswer/add',(req,res)=>{
+    const aswer=req.body
+    AswersModule.create(aswer).then(qusetion=>{
+        res.send({status:0,data:aswer})
+    }).catch(error=>{
+        console.error('添加回答异常', error)
+      res.send({status: 1, msg: '添加回答异常, 请重新尝试'})
+    })
+})
+
+require('./file-upload')(router)
 
 module.exports=router
