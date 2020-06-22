@@ -1,0 +1,35 @@
+.stream-list{
+    margin-bottom: 10px;
+}
+.stream-list__item{
+    height: 62px;
+    padding: 10px 0;
+    border-bottom: 1px solid #E9E9E9;
+    display: flex;
+}
+.answers{
+    border: 1px solid #DCE7D9;
+    margin: 0 10px;
+    width: 34px;
+    height: 35px;
+    text-align: center;
+    padding-top: 3px;
+    font-size: 14px;
+}
+
+.author{
+    color: #AEACB5;
+    margin-right: 6px;
+}
+.q_time{
+    color: #AEACB5;
+}
+.question{
+    margin: 6px;
+    font-size: 14px;
+}
+.label{
+    color: #1E8C75;
+    margin-left: 6px;
+    border: 1px solid #EBEFE1;
+}

@@ -1,21 +1,41 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 import './index.css'
-import {withRouter} from 'react-router-dom'
 class Header extends Component {
-    jump = ()=>{
-        this.props.history.push('/')
+    constructor() {
+        super()
+        this.state = {
+            token: ''
+        }
+    }
+    jump = () => {
+        this.props.history.push("/login")
+    }
+    componentDidMount() {
+        let token = localStorage.getItem("CPRO_TOKEN")
+        this.setState({
+            token
+        })
     }
     render() {
         return (
             <div>
                 <div className="container nav">
-                    <div className="nav_search"><i className="iconfont icon-fangdajing"></i></div>
-                    <div className="nav_img"><img src={require("../../assets/logo.png")} alt="" /></div>
-                    <div className="nav_login" onClick={this.jump}><i className="iconfont icon-geren"></i></div>
+                    <div><i className="iconfont icon-fangdajing"></i></div>
+                    <div><img src={require("../../assets/logo.png")} alt="" /></div>
+                    {
+                        Boolean(this.state.token) ?
+                            <div className="headright">
+                                <img className="headlogo" src={require("../../assets/head.jpg")} />
+                                
+
+                            </div>
+                            :
+                            <div><i className="iconfont icon-geren" onClick={this.jump}></i></div>
+                    }
                 </div>
-                
             </div>
-        );
+        )
     }
 }
 

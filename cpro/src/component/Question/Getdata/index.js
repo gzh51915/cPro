@@ -23,14 +23,25 @@ class index extends Component {
         this.getData()
     }
     render() {
-        console.log(this.state.list)
 
         if(this.state.list.length){
             return (
                 this.state.list.map((item)=>{
                     return(
                         <div key={item.id} className='swiper-slide'>
-                        <img src={item.bannerUrl} alt="" style={{width:'192px',height:'108px', display:"flex"}}/>                  
+                        <a href="">
+                        <img src={item.bannerUrl} alt="" style={{width:'192px',height:'108px'}}/>  
+                                  
+                             
+                        <div className="title">
+                            {item.title}
+                        </div> 
+                            <span className="user">({item.joinedUsers}人参与)</span>
+                            <div className="class_price">
+                            <span className="discountPrice">￥{item.discountPrice}</span>
+                            <span className="price">￥{item.price}</span>
+                            </div>
+                        </a>
                         </div>
                     )
                 })

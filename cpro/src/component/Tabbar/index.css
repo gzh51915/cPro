@@ -1,3 +1,4 @@
+
 .nav-bar ul{
     position: fixed;
     bottom: 0;
@@ -9,6 +10,8 @@
     background-color: #FAFAFA;
     z-index: 10;
     border-top: 1px solid #E6E6E6;
+    text-decoration: none;
+    list-style: none;
 }
 .nav-bar ul li{
     width: 100%;
@@ -22,10 +25,14 @@
     padding-top: 6px;
 }
 .nav-bar ul li a i{
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 .nav-bar ul li .selected{
     color:#009a61;
 }
 
-.nav-bar ul li i{font-size: 20px;}
+.nav-bar ul li i{font-size: 18px;}
+
+.container,.content{
+    height: 100%;
+}

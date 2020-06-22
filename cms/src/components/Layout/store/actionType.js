@@ -1,0 +1,1 @@
+export const QUIT_CHANGE_LOGIN = 'QUIT_CHANGE_LOGIN'

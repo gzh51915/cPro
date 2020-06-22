@@ -1,0 +1,87 @@
+.box{
+    display: flex;
+    justify-content: space-between;
+    .box_wrap{
+        flex: 1;
+        margin: 10px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        justify-content: space-between;
+        border-radius: 15px;
+        .box_contnet{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            // padding: 0 0 0 30px;
+            min-width: 80px;
+            h3{
+                font-size: 20px;
+                font-weight: 600;
+                color: rgba($color: #333, $alpha: 0.7 );
+                margin-bottom: 5px;
+                align-self: center;
+                min-width: 80px;
+                margin-right: 20px;
+            }
+            p{
+                font-size: 20px;
+                color: rgba($color: #333, $alpha: 0.7 );
+                font-weight: 500;
+                align-self: center;
+                margin-right: 20px;
+            }
+        }
+    }
+    .box_usernum{
+        background: rgba($color: #fa5a5a, $alpha: 0.7 );
+    }
+    .box_visits{
+        background: rgba($color: #82c8a0, $alpha: 0.7 );
+    }
+    .box_article{
+        background: rgba($color: #7fccde, $alpha: 0.7 );
+    }
+    .box_answer{
+        background: rgba($color: #6698cb, $alpha: 0.7 );
+    }
+}
+
+// 可视化图形
+.Dashbord{
+    padding: 0 10px;
+    .Dashbord_wrap{
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        #userDashbord{
+            flex: 1;
+            height: 300px;
+            max-width: 600px;
+            margin: 0 10px;
+            margin-bottom: 30px;
+        }
+        #visitsDashbord{
+            flex: 1;
+            height: 300px;
+            margin: 0 10px;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        #articleDashbord{
+            flex: 1;
+            height: 300px;
+            margin: 0 10px;
+            max-width: 600px;
+        }
+        #answerDashbord{
+            flex: 1;
+            height: 300px;
+            margin: 0 10px;
+            max-width: 600px;
+        }
+    }
+}

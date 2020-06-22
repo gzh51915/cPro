@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .news_list ul li {
@@ -63,13 +63,13 @@
 .news__item .news__item_title{
     margin: 5px 0;
     display: flex;
+    height: 30px;
 }
 .news__item .news__item_title h4{
     width: 235px;
     font-size: 18px;
     font-weight: 500;
     display: inline;
-    line-height: 28px;
     color: #212121;
     position: relative;
     vertical-align: middle;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Empty } from 'antd'
 import moment from 'moment';
+import {withRouter} from 'react-router'
 class getArtcle extends Component {
     constructor(props) {
         super(props)
@@ -22,23 +23,28 @@ class getArtcle extends Component {
     }
     componentDidMount() {
         this.getArtcle()
+        
     }
+    
+    
     render() {
-        console.log(this.state.list)
-
         if (this.state.list.length) {
             return (
                 this.state.list.map((item) => {
                     const time = item.create_time
                     return (
-                        <div key={item._id}>
+                        
+                        <div key={item._id} onClick={()=>{
+                            
+                            this.props.history.push("/details/"+item._id)
+                        }}>
                             <div className="news__item">
                             <div className="news__item_title">
                                 <h4>{item.title}</h4>
                                 <img src={require("../../../assets/logo.png")} alt="" />
                             </div>
                             <div className="news__item_content" >
-                                {item.content}
+                                {item.text}
                             </div>
                             <div className="news__item_info">
                                 <span className="vote_operation">
@@ -65,4 +71,4 @@ class getArtcle extends Component {
     }
 }
 
-export default getArtcle;
+export default withRouter(getArtcle);

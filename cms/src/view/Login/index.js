@@ -1,14 +1,23 @@
 import React, { Component } from 'react'
-import { Form, Input, Button, Checkbox ,Card } from 'antd';
+import { Form, Input, Button ,Card } from 'antd';
 import './login.scss'
+import {userLogin} from '../../api/index'
+import {connect} from 'react-redux'
+import {createChangeLogon} from './store/actionCreators'
 
-export default class index extends Component {
+class Login extends Component {
     onFinish = values => {
-        console.log('Success:', values);
+        userLogin(values).then(res=>{
+            if(res.status===0){
+                this.props.changeLogin({isLogin:true,token:res.token});
+                sessionStorage.setItem('CPRO_TOKEN',res.token)
+                this.props.history.push('/home')
+            }
+        })
     };
-    onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
-    };
+    // onFinishFailed = errorInfo => {
+    //     console.log('Failed:', errorInfo);
+    // };
     render() {
         const layout = {
             labelCol: { span: 4 },
@@ -43,10 +52,6 @@ export default class index extends Component {
                             <Input.Password />
                         </Form.Item>
 
-                        <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                            <Checkbox>Remember me</Checkbox>
-                        </Form.Item>
-
                         <Form.Item {...tailLayout}>
                             <Button type="primary" htmlType="submit" block={true}>
                                 登录
@@ -58,3 +63,17 @@ export default class index extends Component {
         )
     }
 }
+const mapState = (state)=>{
+    return {
+        isLogin:state.loginReducer.isLogin
+    }
+}
+const mapDispatch = (dispatch)=>{
+    return{
+        changeLogin(data){
+            dispatch(createChangeLogon(data))
+        }
+    }
+}
+
+export default connect(mapState,mapDispatch)(Login)
